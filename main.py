@@ -5,12 +5,6 @@ from colorama import init, Fore
 
 init(autoreset=True)
 
-SOH = f"{Fore.RED}0x01{Fore.RESET}"
-EOT = f"{Fore.GREEN}0x04{Fore.RESET}"
-ACK = f"{Fore.YELLOW}0x06{Fore.RESET}"
-NAK = f"{Fore.BLUE}0x15{Fore.RESET}"
-CAN = f"{Fore.MAGENTA}0x18{Fore.RESET}"
-
 SOH = 0x01
 EOT = 0x04
 ACK = 0x06
@@ -70,7 +64,7 @@ def xmodem_send(ser, filename, simulate=False):
                 if not simulate:
                     print(f"{Fore.MAGENTA}發送 NAK: (0x15)")
                     ser.write(bytes([NAK]))
-                    
+
                     
             total_bytes_sent += len(data)
             block_number += 1
@@ -86,6 +80,8 @@ def xmodem_send(ser, filename, simulate=False):
         if response == bytes([ACK]):
             print(f"{Fore.GREEN}接收到 ACK: 6(0x06)")
             print(f"{Fore.GREEN}傳輸完成")
+            # 終端機發出聲音
+            print('\a')
         else:
             print(f"{Fore.RED}傳輸失敗")
             
