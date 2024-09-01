@@ -54,5 +54,5 @@ python main.py receive COM3 9600 received.txt simulate
 ```
 python main.py send COM3 2000000 file.bin simulate
 ```
-
+![xmodem](image.png)
 ![./demo.png](./demo.png)
