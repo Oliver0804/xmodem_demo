@@ -41,7 +41,7 @@ def send_block(ser, block_number, data, simulate=False):
     
     print(f"發送塊 #{block_number}")
     print(f"塊內容: {soh_colored}{block_number_colored}{complement_colored}{data_colored}{checksum_colored}")
-    print(f"說明: SOH={Fore.RED}0x01{Fore.RESET}, Block Number={Fore.YELLOW}{block_number}{Fore.RESET}, Complement={Fore.CYAN}{255 - block_number}{Fore.RESET}, Checksum={Fore.BLUE}{checksum(data)}{Fore.RESET}\n")
+    print(f"說明: SOH={Fore.RED}1(0x01){Fore.RESET}, Block Number={Fore.YELLOW}{block_number}({block_number:#04x}){Fore.RESET}, Complement={Fore.CYAN}{255 - block_number}({255 - block_number:#04x}){Fore.RESET}, Checksum={Fore.BLUE}{checksum(data)}({checksum(data):#04x}){Fore.RESET}\n")
 
     if simulate:
         return True #  Simulate 模式下不發送數據，直接返回成功
