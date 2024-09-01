@@ -19,7 +19,7 @@ pip install pyserial colorama
 
 ## 使用方法
 ### 發送文件
-
+![./demo.png](./demo.png)
 要發送文件，請使用以下命令：
 ```
 python main.py send <串行端口> <波特率> <文件名> <模擬模式>
@@ -55,4 +55,5 @@ python main.py receive COM3 9600 received.txt simulate
 python main.py send COM3 2000000 file.bin simulate
 ```
 ![xmodem](image.png)
-![./demo.png](./demo.png)
+
+![esp32](esp32有待nack.png)
