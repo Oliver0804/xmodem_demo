@@ -68,24 +68,29 @@ def xmodem_send(ser, filename, simulate=False):
 
             while not send_block(ser, block_number, data, simulate=simulate):
                 if not simulate:
+                    print(f"{Fore.MAGENTA}發送 NAK: (0x15)")
                     ser.write(bytes([NAK]))
+                    
                     
             total_bytes_sent += len(data)
             block_number += 1
     
     # 傳輸結束
     if simulate:
-        print("發送結束 (EOT)")
-        print(f"說明: EOT={EOT}")
-        
+        print(f"{Fore.MAGENTA}發送結束 (EOT)")
+        print(f"說明: EOT={Fore.GREEN}4(0x04){Fore.RESET}")
     else:
         ser.write(bytes([EOT]))
-        if ser.read(1) == bytes([ACK]):
-            print("傳輸完成")
+        print(f"{Fore.MAGENTA}發送 EOT: 4(0x04)")
+        response = ser.read(1)
+        if response == bytes([ACK]):
+            print(f"{Fore.GREEN}接收到 ACK: 6(0x06)")
+            print(f"{Fore.GREEN}傳輸完成")
         else:
-            print("傳輸失敗")
-    
-    print(f"共發送 {total_bytes_sent} bytes")
+            print(f"{Fore.RED}傳輸失敗")
+            
+    print(f"{Fore.CYAN}共發送 {total_bytes_sent} bytes")
+
 
 def receive_block(ser, simulate=False):
     """接收一個數據塊"""
